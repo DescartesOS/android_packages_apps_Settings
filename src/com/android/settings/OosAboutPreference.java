@@ -169,7 +169,7 @@ public class OosAboutPreference extends BasePreferenceController
     private String getVersionLine() {
         String version = SystemProperties.get("ro.descartes.version",
                 SystemProperties.get("ro.crdroid.build.version"));
-        String maintainer = SystemProperties.get("ro.descartes.maintainer");
+        String maintainer = AboutPhoneData.getProp("ro.descartes.maintainer");
         String tail = !TextUtils.isEmpty(maintainer) ? maintainer
                 : SystemProperties.get("ro.descartes.buildtype", "UNOFFICIAL");
         return TextUtils.isEmpty(version) ? tail : version + " | " + tail;

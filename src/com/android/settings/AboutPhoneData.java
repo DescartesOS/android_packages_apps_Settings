@@ -27,14 +27,19 @@ public class AboutPhoneData {
     private static final String PROP_CAMERA_FRONT = "ro.descartes.camera.front";
     private static final String PROP_CAMERA_REAR = "ro.descartes.camera.rear";
 
+    public static String getProp(String key) {
+        String value = SystemProperties.get(key);
+        return TextUtils.isEmpty(value) ? value : value.replace('_', ' ').trim();
+    }
+
     public AboutPhoneData(Context context) {
         this.context = context.getApplicationContext();
         this.soc = detectSoC();
         this.batteryCapacity = detectBatteryCapacity();
-        this.battery = SystemProperties.get(PROP_BATTERY);
+        this.battery = getProp(PROP_BATTERY);
         this.display = detectDisplay();
-        String front = SystemProperties.get(PROP_CAMERA_FRONT);
-        String rear = SystemProperties.get(PROP_CAMERA_REAR);
+        String front = getProp(PROP_CAMERA_FRONT);
+        String rear = getProp(PROP_CAMERA_REAR);
         if (TextUtils.isEmpty(front) && TextUtils.isEmpty(rear)) {
             front = detectCameras(CameraCharacteristics.LENS_FACING_FRONT);
             rear = detectCameras(CameraCharacteristics.LENS_FACING_BACK);
@@ -52,7 +57,7 @@ public class AboutPhoneData {
     }
 
     private String detectSoC() {
-        String prop = SystemProperties.get(PROP_SOC);
+        String prop = getProp(PROP_SOC);
         if (!TextUtils.isEmpty(prop)) return prop;
         String manufacturer = firstProp("ro.soc.manufacturer");
         String model = firstProp("ro.soc.model", "ro.board.platform",
@@ -72,7 +77,7 @@ public class AboutPhoneData {
     }
 
     private String detectDisplay() {
-        String prop = SystemProperties.get(PROP_DISPLAY);
+        String prop = getProp(PROP_DISPLAY);
         if (!TextUtils.isEmpty(prop)) return prop;
         DisplayManager dm = context.getSystemService(DisplayManager.class);
         Display display = dm != null ? dm.getDisplay(Display.DEFAULT_DISPLAY) : null;
