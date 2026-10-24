@@ -27,6 +27,14 @@
         android:selectable="false"
         settings:isPreferenceVisible="false"/>
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="descartes_about_layout"
+        android:layout="@layout/oos_about"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:allowDividerBelow="false"
+        settings:controller="com.android.settings.OosAboutPreference"/>
+
     <PreferenceCategory
         android:key="basic_info_category"
         android:selectable="false"

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: DescartesOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="315"
+                android:endColor="@color/settingslib_materialColorTertiary"
+                android:startColor="@color/settingslib_materialColorPrimary"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item
+        android:width="420dp"
+        android:height="420dp"
+        android:gravity="center"
+        android:left="140dp"
+        android:top="40dp">
+        <shape android:shape="oval">
+            <gradient
+                android:angle="270"
+                android:endColor="#00FFFFFF"
+                android:startColor="#40FFFFFF"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item
+        android:width="300dp"
+        android:height="300dp"
+        android:gravity="bottom|start"
+        android:bottom="-160dp"
+        android:left="-80dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/settingslib_materialColorPrimaryContainer" />
+        </shape>
+    </item>
+</layer-list>

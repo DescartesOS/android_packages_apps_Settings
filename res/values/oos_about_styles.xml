@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: DescartesOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <style name="DescartesAboutRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">60dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">20dp</item>
+        <item name="android:paddingVertical">14dp</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+    <style name="DescartesAboutRowTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">variable-title-medium</item>
+        <item name="android:textColor">@color/settingslib_materialColorOnSurface</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="DescartesAboutRowValue">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/settingslib_materialColorOnSurfaceVariant</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="DescartesAboutChevron">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:src">@drawable/descartes_about_chevron</item>
+    </style>
+
+    <style name="DescartesAboutSpecLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">18dp</item>
+        <item name="android:textColor">@color/settingslib_materialColorOnSurfaceVariant</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="DescartesAboutSpecValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:fontFamily">variable-title-medium</item>
+        <item name="android:textColor">@color/settingslib_materialColorOnSurface</item>
+        <item name="android:textIsSelectable">true</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="DescartesAboutSpecDetail">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textColor">@color/settingslib_materialColorOnSurface</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+</resources>
