@@ -6,6 +6,7 @@
 <resources>
     <dimen name="descartes_about_margin">16dp</dimen>
     <dimen name="descartes_about_card_gap">12dp</dimen>
+    <dimen name="descartes_about_seg_gap">3dp</dimen>
     <dimen name="descartes_about_card_radius">24dp</dimen>
-    <dimen name="descartes_about_banner_radius">28dp</dimen>
+    <dimen name="descartes_about_banner_radius">32dp</dimen>
 </resources>

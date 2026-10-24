@@ -7,11 +7,10 @@
     <style name="DescartesAboutRow">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">60dp</item>
+        <item name="android:minHeight">64dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingHorizontal">20dp</item>
-        <item name="android:paddingVertical">14dp</item>
-        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:paddingVertical">16dp</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
@@ -19,7 +18,7 @@
     <style name="DescartesAboutRowTitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:fontFamily">variable-title-medium</item>
+        <item name="android:fontFamily">variable-title-medium-emphasized</item>
         <item name="android:textColor">@color/settingslib_materialColorOnSurface</item>
         <item name="android:textSize">17sp</item>
     </style>
@@ -44,29 +43,53 @@
         <item name="android:src">@drawable/descartes_about_chevron</item>
     </style>
 
+    <style name="DescartesAboutSpecTile">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">18dp</item>
+    </style>
+
+    <style name="DescartesAboutSpecIcon">
+        <item name="android:layout_width">44dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:layout_marginBottom">14dp</item>
+    </style>
+
+    <style name="DescartesAboutSpecShape">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:importantForAccessibility">no</item>
+    </style>
+
+    <style name="DescartesAboutSpecGlyph">
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:importantForAccessibility">no</item>
+    </style>
+
     <style name="DescartesAboutSpecLabel">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">18dp</item>
         <item name="android:textColor">@color/settingslib_materialColorOnSurfaceVariant</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <style name="DescartesAboutSpecValue">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">2dp</item>
-        <item name="android:fontFamily">variable-title-medium</item>
+        <item name="android:fontFamily">variable-title-large-emphasized</item>
         <item name="android:textColor">@color/settingslib_materialColorOnSurface</item>
         <item name="android:textIsSelectable">true</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="DescartesAboutSpecDetail">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">2dp</item>
-        <item name="android:textColor">@color/settingslib_materialColorOnSurface</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/settingslib_materialColorOnSurfaceVariant</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

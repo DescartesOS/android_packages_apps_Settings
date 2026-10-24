@@ -23,13 +23,13 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.widget.WavyProgressView;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -111,7 +111,7 @@ public class OosAboutPreference extends BasePreferenceController
         TextView battery = holder.findViewById(R.id.battery_about);
         TextView display = holder.findViewById(R.id.display_about);
         TextView storage = holder.findViewById(R.id.rom_about);
-        ProgressBar storageBar = holder.findViewById(R.id.rom_progress_bar);
+        WavyProgressView storageBar = holder.findViewById(R.id.rom_progress_bar);
         ImageView androidVersion = holder.findViewById(R.id.android_version);
         deviceName = holder.findViewById(R.id.device_name);
 
@@ -192,19 +192,23 @@ public class OosAboutPreference extends BasePreferenceController
         String rear = phoneData.getRearCameras();
         if (TextUtils.isEmpty(front) && TextUtils.isEmpty(rear)) {
             holder.findViewById(R.id.camera_section).setVisibility(View.GONE);
+            holder.findViewById(R.id.camera_gap).setVisibility(View.GONE);
+            holder.findViewById(R.id.display_section).setBackgroundResource(
+                    R.drawable.descartes_about_seg_bottom);
             return;
         }
-        TextView frontView = holder.findViewById(R.id.camera_front);
-        TextView rearView = holder.findViewById(R.id.camera_rear);
-        if (TextUtils.isEmpty(front)) {
-            frontView.setVisibility(View.GONE);
-        } else {
-            frontView.setText(context.getString(R.string.descartes_about_camera_front, front));
-        }
+        TextView main = holder.findViewById(R.id.camera_rear);
+        TextView detail = holder.findViewById(R.id.camera_front);
         if (TextUtils.isEmpty(rear)) {
-            rearView.setVisibility(View.GONE);
+            main.setText(context.getString(R.string.descartes_about_camera_front, front));
+            detail.setVisibility(View.GONE);
+            return;
+        }
+        main.setText(context.getString(R.string.descartes_about_camera_rear, rear));
+        if (TextUtils.isEmpty(front)) {
+            detail.setVisibility(View.GONE);
         } else {
-            rearView.setText(context.getString(R.string.descartes_about_camera_rear, rear));
+            detail.setText(context.getString(R.string.descartes_about_camera_front, front));
         }
     }
 
@@ -233,7 +237,7 @@ public class OosAboutPreference extends BasePreferenceController
         return 0;
     }
 
-    private void animateProgressBar(ProgressBar progressBar, int progress) {
+    private void animateProgressBar(WavyProgressView progressBar, int progress) {
         ObjectAnimator animator = ObjectAnimator.ofInt(progressBar, "progress", 0, progress);
         animator.setDuration(1000);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());

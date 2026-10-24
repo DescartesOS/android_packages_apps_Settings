@@ -8,8 +8,7 @@
     <string name="descartes_about_storage">Storage</string>
     <string name="descartes_about_ram">RAM</string>
     <string name="descartes_about_cameras">Cameras</string>
-    <string name="descartes_about_camera_system">Camera system</string>
-    <string name="descartes_about_camera_front">Front : <xliff:g id="megapixels" example="8 MP">%1$s</xliff:g></string>
-    <string name="descartes_about_camera_rear">Rear : <xliff:g id="megapixels" example="50 MP + 8 MP">%1$s</xliff:g></string>
+    <string name="descartes_about_camera_front">Front <xliff:g id="megapixels" example="8 MP">%1$s</xliff:g></string>
+    <string name="descartes_about_camera_rear"><xliff:g id="megapixels" example="50 MP + 8 MP">%1$s</xliff:g></string>
     <string name="descartes_about_battery_typ"><xliff:g id="capacity" example="7000">%1$d</xliff:g> mAh (TYP)</string>
 </resources>
