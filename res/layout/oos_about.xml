@@ -7,6 +7,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/oos_about_root"
+    android:layoutAnimation="@anim/descartes_stagger"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -37,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:layoutAnimation="@anim/descartes_stagger"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@id/about_banner_art"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +73,7 @@
 
         <TextView
             android:id="@+id/about_update_pill"
+            android:stateListAnimator="@animator/descartes_press"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
