@@ -32,14 +32,23 @@ public class AboutPhoneData {
         return TextUtils.isEmpty(value) ? value : value.replace('_', ' ').trim();
     }
 
+    private static String formatCameras(String value) {
+        if (TextUtils.isEmpty(value) || !value.matches("[0-9.,\\s]+")) return value;
+        List<String> megapixels = new ArrayList<>();
+        for (String mp : value.split(",")) {
+            if (!mp.trim().isEmpty()) megapixels.add(mp.trim() + " MP");
+        }
+        return TextUtils.join(" + ", megapixels);
+    }
+
     public AboutPhoneData(Context context) {
         this.context = context.getApplicationContext();
         this.soc = detectSoC();
         this.batteryCapacity = detectBatteryCapacity();
         this.battery = getProp(PROP_BATTERY);
         this.display = detectDisplay();
-        String front = getProp(PROP_CAMERA_FRONT);
-        String rear = getProp(PROP_CAMERA_REAR);
+        String front = formatCameras(getProp(PROP_CAMERA_FRONT));
+        String rear = formatCameras(getProp(PROP_CAMERA_REAR));
         if (TextUtils.isEmpty(front) && TextUtils.isEmpty(rear)) {
             front = detectCameras(CameraCharacteristics.LENS_FACING_FRONT);
             rear = detectCameras(CameraCharacteristics.LENS_FACING_BACK);
