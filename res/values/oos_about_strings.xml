@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_processor">Processor</string>
+    <string name="text_display">Display</string>
+    <string name="text_battery">Battery</string>
+    <string name="text_camera">Camera</string>
+    <string name="text_maintainer">Maintainer</string>
+    <string name="text_kernel_version">Kernel</string>
+    <string name="official_build_suffix">- Official</string>
+    <string name="unofficial_build_suffix">- Unofficial</string>
+    <string name="ram_active_label">Active</string>
+</resources>

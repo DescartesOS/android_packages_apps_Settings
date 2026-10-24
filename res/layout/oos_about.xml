@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/oos_about_root"
+    android:clickable="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <LinearLayout
+        android:id="@+id/miniDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rect3"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".6"
+            android:orientation="vertical"
+            android:padding="20dp">
+            
+            <TextView
+                android:id="@+id/device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pureBlack"
+                android:textStyle="bold"
+                android:fontFamily="variable-title-medium-emphasized"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+                
+                <LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_marginTop="2dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+        		app:layout_constraintStart_toStartOf="parent">
+                    
+		        <TextView
+		            android:id="@+id/infinity_version"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textStyle="bold"
+		            android:textColor="@color/pureBlack"
+		            android:fontFamily="variable-title-medium-emphasized"
+		            android:textSize="15sp" />
+		            
+		        <com.airbnb.lottie.LottieAnimationView
+			    android:id="@+id/green_animation_view"
+			    android:layout_width="20dp"
+			    android:layout_height="20dp"
+			    android:layout_marginStart="3dp"
+			    android:clickable="false"
+			    app:lottie_rawRes="@raw/green_status"
+			    app:lottie_loop="false"
+			    app:lottie_autoPlay="true" />
+
+			<com.airbnb.lottie.LottieAnimationView
+			    android:id="@+id/red_animation_view"
+			    android:layout_width="20dp"
+			    android:layout_height="20dp"
+			    android:layout_marginStart="3dp"
+			    android:clickable="false"
+			    app:lottie_rawRes="@raw/red_status"
+			    app:lottie_loop="false"
+			    app:lottie_autoPlay="true" />
+		</LinearLayout>	
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    app:cardBackgroundColor="#00000000"
+	    app:cardElevation="0dp">
+
+        <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/device_about"
+                    android:layout_width="90dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="20dp"
+                    android:scaleType="fitCenter"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="?android:attr/textColorPrimary"
+                    app:strokeWidth="3dp">
+
+                    <com.android.settings.utils.aboutWallpaperView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:elevation="0dp"
+                        android:gravity="center"
+                        android:orientation="vertical" />
+          </com.google.android.material.card.MaterialCardView>                       
+       </com.google.android.material.card.MaterialCardView> 
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/finalDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rect3"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/miniDetails">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+            
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:orientation="vertical">
+                    
+                <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="10dp"
+		    android:layout_marginBottom="10dp"
+		    android:orientation="vertical">
+
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/text_processor"
+		            android:textColor="@color/off_black" />
+
+		        <TextView
+		            android:id="@+id/soc_about"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textStyle="bold"
+		            android:textColor="@color/pureBlack"
+		            android:fontFamily="variable-title-medium-emphasized"
+		            android:textSize="15sp" />
+		</LinearLayout> 
+		
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="10dp"
+		    android:orientation="vertical">
+
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/text_display"
+		            android:textColor="@color/off_black" />
+
+		        <TextView
+		            android:id="@+id/display_about"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textStyle="bold"
+		            android:textColor="@color/pureBlack"
+		            android:fontFamily="variable-title-medium-emphasized"
+		            android:textSize="15sp" />
+		</LinearLayout> 
+                    
+                <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="10dp"
+		    android:orientation="vertical">
+
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/text_battery"
+		            android:textColor="@color/off_black" />
+
+		        <TextView
+		            android:id="@+id/battery_about"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textStyle="bold"
+		            android:textColor="@color/pureBlack"
+		            android:fontFamily="variable-title-medium-emphasized"
+		            android:textSize="15sp" />
+		</LinearLayout>
+		
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="10dp"
+		    android:orientation="vertical">
+
+		        <TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="@string/text_camera"
+		            android:textColor="@color/off_black" />
+
+		        <TextView
+		            android:id="@+id/camera_about"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textStyle="bold"
+		            android:textColor="@color/pureBlack"
+		            android:fontFamily="variable-title-medium-emphasized"
+		            android:textSize="15sp" />
+		</LinearLayout> 				
+		
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical">
+		    
+		    <LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:orientation="horizontal"
+			android:gravity="center_vertical">
+			
+			<TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="RAM:"
+		            android:textColor="@color/off_black"
+		            android:layout_marginEnd="10dp" />
+		    
+		    <LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+		        <TextView
+		            android:id="@+id/ram_about"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textStyle="bold"
+		            android:textColor="@color/pureBlack"
+		            android:fontFamily="variable-title-medium-emphasized"
+		            android:textSize="15sp" />
+		        
+		        <ProgressBar
+			    android:id="@+id/ram_progress_bar"
+			    style="?android:attr/progressBarStyleHorizontal"
+			    android:layout_width="match_parent"
+			    android:layout_height="6dp"
+			    android:layout_marginTop="4dp"
+			    android:layout_marginEnd="50dp"
+			    android:layout_gravity="start"
+			    android:progressDrawable="@drawable/custom_progress_bar"
+			    android:max="100" />
+		    </LinearLayout>
+	          </LinearLayout>
+	          
+	          <LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:orientation="horizontal"
+			android:gravity="center_vertical">
+			
+			<TextView
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:text="ROM:"
+		            android:textColor="@color/off_black"
+		            android:layout_marginEnd="10dp" />	
+			
+	            <LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+		        <TextView
+		            android:id="@+id/rom_about"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:textStyle="bold"
+		            android:textColor="@color/pureBlack"
+		            android:fontFamily="variable-title-medium-emphasized"
+		            android:textSize="15sp" />
+		    
+		        <ProgressBar
+			    android:id="@+id/rom_progress_bar"
+			    style="?android:attr/progressBarStyleHorizontal"
+			    android:layout_width="match_parent"
+			    android:layout_height="6dp"
+			    android:layout_marginTop="4dp"
+			    android:layout_marginEnd="50dp"
+			    android:layout_gravity="start"
+			    android:progressDrawable="@drawable/custom_progress_bar"
+			    android:max="100" />
+		     </LinearLayout>
+		 </LinearLayout>	        
+             </LinearLayout>
+          </LinearLayout>
+	    
+          <ImageView
+		android:id="@+id/android_version"
+		android:layout_width="0dp"
+		android:layout_height="80dp"
+		android:layout_weight=".3"
+		android:layout_marginStart="10dp"
+		android:layout_marginEnd="10dp"
+		android:src="@drawable/A17"
+		android:layout_gravity="center_vertical" />		
+       </LinearLayout>		
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/rect3"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/finalDetail">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">	     
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/text_maintainer"
+                    android:textColor="@color/off_black" />
+
+                <TextView
+                    android:id="@+id/infinity_maintainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/pureBlack"
+                    android:fontFamily="variable-title-medium-emphasized"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"                    
+                    android:text="@string/security_patch"
+                    android:textColor="@color/off_black" />
+
+                <TextView
+                    android:id="@+id/security_update"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textStyle="bold"
+                    android:fontFamily="variable-title-medium-emphasized"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"                    
+                    android:text="@string/text_kernel_version"
+                    android:textColor="@color/off_black" />
+
+                <TextView
+                    android:id="@+id/kernel_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:fontFamily="variable-title-medium-emphasized"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

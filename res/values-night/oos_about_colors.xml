@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FAFAFA</color>
+    <color name="off_black">#90FAFAFA</color>
+    <color name="pureBlack">#fff</color>
+    <color name="crd_bg">@android:color/system_neutral1_800</color>
+     <color name="green_percentage">#15ED19</color>
+     <color name="red_percentage">#FF1100</color>
+     <color name="progress_background">#424242</color>
+</resources>
