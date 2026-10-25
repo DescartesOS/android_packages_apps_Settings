@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  SPDX-FileCopyrightText: DescartesOS
+  SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <dimen name="descartes_search_pill_height">56dp</dimen>
+    <dimen name="descartes_search_pill_margin">16dp</dimen>
+    <dimen name="descartes_search_pill_elevation">4dp</dimen>
+</resources>

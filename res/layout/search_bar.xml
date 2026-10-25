@@ -19,24 +19,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/SearchBarStyle_v2"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/descartes_search_pill_height">
 
     <LinearLayout
         android:id="@+id/search_action_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="72dp"
+        android:layout_height="@dimen/descartes_search_pill_height"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:focusedByDefault="true"
-        android:background="@drawable/search_bar_selected_background">
+        android:background="@drawable/descartes_search_pill_ripple">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_homepage_search" />
         <TextView
@@ -44,7 +43,7 @@
             style="@style/TextAppearance.SearchBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="12dp"
             android:paddingEnd="8dp"
             android:text="@string/homepage_search"/>
     </LinearLayout>

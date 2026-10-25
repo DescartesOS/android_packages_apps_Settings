@@ -338,7 +338,7 @@
     <style name="TextAppearance.SearchBar">
         <item name="android:layout_gravity">center</item>
         <item name="android:fontFamily">@*android:string/config_headlineFontFamily</item>
-        <item name="android:textSize">@dimen/search_bar_text_size</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/materialColorOnSurfaceVariant</item>
         <item name="android:singleLine">true</item>
     </style>
@@ -585,12 +585,14 @@
         <item name="android:theme">@style/Theme.MaterialComponents.DayNight</item>
         <item name="cardCornerRadius">@dimen/search_bar_corner_radius</item>
         <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@android:color/transparent</item>
     </style>
 
     <style name="SearchBarStyle_v2">
         <item name="android:theme">@style/Theme.MaterialComponents.DayNight</item>
-        <item name="cardCornerRadius">40dp</item>
+        <item name="cardCornerRadius">28dp</item>
         <item name="cardElevation">0dp</item>
+        <item name="cardBackgroundColor">@android:color/transparent</item>
         <item name="strokeWidth">1dp</item>
         <item name="strokeColor">@color/settingslib_materialColorOutlineVariant</item>
     </style>

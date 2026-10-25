@@ -47,6 +47,21 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.text.LineBreakConfig;
+import android.os.Build;
+import android.text.Layout;
+import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
+import android.view.animation.Interpolator;
+import android.view.animation.PathInterpolator;
+import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
+import com.android.settings.widget.DescartesBlurView;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.Insets;
 import androidx.core.util.Consumer;
@@ -262,6 +277,9 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mLoadedListeners = new ArraySet<>();
 
         initSearchBarView();
+        initHomepageCollapsingToolbar();
+        setupFloatingSearchScrollAnimation();
+        updateSearchBarLayout();
 
         getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
         mCategoryMixin = new CategoryMixin(this);
@@ -393,28 +411,62 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 (v, windowInsets) -> {
                     Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars()
                             | WindowInsetsCompat.Type.displayCutout());
-                    // Apply the insets paddings to the view.
-                    v.setPadding(insets.left, 0, insets.right, insets.bottom);
+                    v.setPadding(insets.left, 0, insets.right, 0);
 
-                    // reset the top padding of search bar container to original top padding
-                    // plus insets top.
                     View container = findViewById(R.id.app_bar_container);
-                    final int top_padding = getResources().getDimensionPixelSize(
-                            R.dimen.search_bar_container_top_padding);
-                    container.setPadding(container.getPaddingLeft(), top_padding + insets.top,
-                            container.getPaddingRight(), container.getPaddingBottom());
+                    if (container != null) {
+                        final int top_padding = getResources().getDimensionPixelSize(
+                                R.dimen.search_bar_container_top_padding);
+                        container.setPadding(container.getPaddingLeft(), top_padding + insets.top,
+                                container.getPaddingRight(), container.getPaddingBottom());
+                    }
 
-                    // Return CONSUMED if you don't want the window insets to keep being
-                    // passed down to descendant views.
+                    View floatingSearchBar = findViewById(R.id.floating_search_bar_container);
+                    if (floatingSearchBar != null) {
+                        ViewGroup.MarginLayoutParams lp =
+                                (ViewGroup.MarginLayoutParams) floatingSearchBar.getLayoutParams();
+                        int baseMargin = getResources().getDimensionPixelSize(
+                                R.dimen.descartes_search_pill_margin);
+                        lp.bottomMargin = baseMargin + insets.bottom;
+                        lp.leftMargin = baseMargin;
+                        lp.rightMargin = baseMargin;
+                        floatingSearchBar.setLayoutParams(lp);
+                    }
+
+                    View scrollContainer = findViewById(R.id.main_content_scrollable_container);
+                    if (scrollContainer != null) {
+                        int pillHeight = getResources().getDimensionPixelSize(
+                                R.dimen.descartes_search_pill_height);
+                        int baseMargin = getResources().getDimensionPixelSize(
+                                R.dimen.descartes_search_pill_margin);
+                        int bottomPadding = pillHeight + (baseMargin * 2) + insets.bottom;
+                        scrollContainer.setPadding(
+                                scrollContainer.getPaddingLeft(),
+                                scrollContainer.getPaddingTop(),
+                                scrollContainer.getPaddingRight(),
+                                bottomPadding);
+                    }
+
                     return WindowInsetsCompat.CONSUMED;
                 });
     }
 
     private void initSearchBarView() {
         View toolbar = findViewById(R.id.search_action_bar);
-        FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
-                .initSearchToolbar(this /* activity */, toolbar,
-                        SettingsEnums.SETTINGS_HOMEPAGE);
+        if (toolbar != null) {
+            FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
+                    .initSearchToolbar(this /* activity */, toolbar,
+                            SettingsEnums.SETTINGS_HOMEPAGE);
+        }
+        View twoPaneContainer = findViewById(R.id.two_pane_search_bar);
+        if (twoPaneContainer != null) {
+            View twoPaneToolbar = twoPaneContainer.findViewById(R.id.search_action_bar);
+            if (twoPaneToolbar != null && twoPaneToolbar != toolbar) {
+                FeatureFactory.getFeatureFactory().getSearchFeatureProvider()
+                        .initSearchToolbar(this /* activity */, twoPaneToolbar,
+                                SettingsEnums.SETTINGS_HOMEPAGE);
+            }
+        }
     }
 
     private void updateHomepageUI() {
@@ -422,8 +474,25 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (mIsTwoPane != newTwoPaneState) {
             mIsTwoPane = newTwoPaneState;
             updateHomepageBackground();
+            updateSearchBarLayout();
         }
         updateSplitLayout();
+    }
+
+    private void updateSearchBarLayout() {
+        View floatingBar = findViewById(R.id.floating_search_bar_container);
+        View topBarContainer = findViewById(R.id.app_bar_container);
+        View collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+
+        if (mIsTwoPane) {
+            if (floatingBar != null) floatingBar.setVisibility(View.GONE);
+            if (topBarContainer != null) topBarContainer.setVisibility(View.VISIBLE);
+            if (collapsingToolbar != null) collapsingToolbar.setVisibility(View.GONE);
+        } else {
+            if (floatingBar != null) floatingBar.setVisibility(View.VISIBLE);
+            if (topBarContainer != null) topBarContainer.setVisibility(View.GONE);
+            if (collapsingToolbar != null) collapsingToolbar.setVisibility(View.VISIBLE);
+        }
     }
 
     private void updateHomepageBackground() {
@@ -440,8 +509,106 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         // Update content background.
         findViewById(android.R.id.content).setBackgroundColor(color);
-        //Update search bar background
-        findViewById(R.id.app_bar_container).setBackgroundColor(color);
+        // Update search bar background
+        View appBarContainer = findViewById(R.id.app_bar_container);
+        if (appBarContainer != null) {
+            appBarContainer.setBackgroundColor(color);
+        }
+    }
+
+    private void initHomepageCollapsingToolbar() {
+        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        AppBarLayout appBarLayout = findViewById(R.id.app_bar);
+        if (collapsingToolbar != null) {
+            collapsingToolbar.setTitle(getString(R.string.settings_label));
+            collapsingToolbar.setLineSpacingMultiplier(1.1f);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                collapsingToolbar.setHyphenationFrequency(Layout.HYPHENATION_FREQUENCY_NORMAL_FAST);
+                collapsingToolbar.setStaticLayoutBuilderConfigurer(builder ->
+                        builder.setLineBreakConfig(
+                                new LineBreakConfig.Builder()
+                                        .setLineBreakWordStyle(
+                                                LineBreakConfig.LINE_BREAK_WORD_STYLE_PHRASE)
+                                        .build()));
+            }
+        }
+        if (appBarLayout != null && collapsingToolbar != null) {
+            setupFrostedAppBar(appBarLayout, collapsingToolbar);
+        }
+    }
+
+    private void setupFrostedAppBar(
+            @NonNull AppBarLayout appBarLayout,
+            @NonNull CollapsingToolbarLayout collapsingToolbar) {
+        final Context context = this;
+        final int surfaceColor = getColor(
+                com.android.settingslib.widget.theme.R.color.settingslib_materialColorSurfaceContainerHigh);
+        final boolean blurSupported = DescartesBlurView.isBlurSupported(context);
+        final int alpha = blurSupported ? 0xCC : 0xEE;
+        final int scrimColor = (surfaceColor & 0x00FFFFFF) | (alpha << 24);
+
+        collapsingToolbar.setContentScrim(new ColorDrawable(scrimColor));
+
+        appBarLayout.setWillNotDraw(false);
+        appBarLayout.setOutlineProvider(ViewOutlineProvider.BOUNDS);
+        appBarLayout.setClipToOutline(true);
+
+        final float blurRadius = 25.0f;
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            private boolean mAppliedBlur = false;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBar, int verticalOffset) {
+                final boolean scrolled = Math.abs(verticalOffset) > 0;
+                if (scrolled != mAppliedBlur) {
+                    mAppliedBlur = scrolled;
+                    if (scrolled && DescartesBlurView.isBlurSupported(appBar.getContext())) {
+                        DescartesBlurView.applyBackdropBlur(appBar, blurRadius);
+                    } else {
+                        DescartesBlurView.applyBackdropBlur(appBar, 0);
+                    }
+                }
+            }
+        });
+    }
+
+    private void setupFloatingSearchScrollAnimation() {
+        final View floatingSearchBar = findViewById(R.id.floating_search_bar_container);
+        final NestedScrollView scrollView = findViewById(R.id.main_content_scrollable_container);
+        if (floatingSearchBar == null || scrollView == null) {
+            return;
+        }
+
+        final Interpolator interpolator = new PathInterpolator(0.2f, 0.0f, 0.0f, 1.0f);
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            private boolean mIsShrunk = false;
+
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY,
+                    int oldScrollX, int oldScrollY) {
+                int dy = scrollY - oldScrollY;
+                if (dy > 8 && !mIsShrunk && scrollY > 100) {
+                    mIsShrunk = true;
+                    floatingSearchBar.animate()
+                            .scaleX(0.94f)
+                            .scaleY(0.94f)
+                            .alpha(0.7f)
+                            .setDuration(300)
+                            .setInterpolator(interpolator)
+                            .start();
+                } else if (dy < -8 && mIsShrunk) {
+                    mIsShrunk = false;
+                    floatingSearchBar.animate()
+                            .scaleX(1.0f)
+                            .scaleY(1.0f)
+                            .alpha(1.0f)
+                            .setDuration(300)
+                            .setInterpolator(interpolator)
+                            .start();
+                }
+            }
+        });
     }
 
     private void showSuggestionFragment(boolean scrollNeeded) {

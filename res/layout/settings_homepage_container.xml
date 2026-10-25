@@ -26,6 +26,7 @@
         android:id="@+id/main_content_scrollable_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         app:layout_behavior="com.android.settings.widget.HomepageAppBarScrollingViewBehavior">
 
         <LinearLayout
@@ -62,9 +63,14 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
+        android:fitsSystemWindows="true"
+        android:outlineAmbientShadowColor="@android:color/transparent"
+        android:outlineSpotShadowColor="@android:color/transparent"
+        android:background="@android:color/transparent"
         android:touchscreenBlocksFocus="false"
-        android:keyboardNavigationCluster="false">
+        android:keyboardNavigationCluster="false"
+        android:theme="@style/SettingsLibTheme.CollapsingToolbar.Expressive">
+
         <LinearLayout
             android:id="@+id/app_bar_container"
             android:layout_width="match_parent"
@@ -74,10 +80,56 @@
             android:paddingBottom="@dimen/settingslib_expressive_space_extrasmall4"
             android:paddingStart="?android:attr/listPreferredItemPaddingStart"
             android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-            android:background="?android:attr/colorBackground">
+            android:background="?android:attr/colorBackground"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/two_pane_search_bar"
+                layout="@layout/search_bar"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settingslib_toolbar_layout_height"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:toolbarId="@id/action_bar"
+            app:title="@string/settings_label"
+            app:maxLines="2"
+            style="@style/SettingsLibCollapsingToolbarLayoutStyle.Expressive">
+
+            <Toolbar
+                android:id="@+id/action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginStart="@dimen/settingslib_expressive_space_extrasmall4"
+                android:paddingStart="@dimen/settingslib_expressive_space_extrasmall4"
+                android:theme="?android:attr/actionBarTheme"
+                android:touchscreenBlocksFocus="false"
+                app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/floating_search_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/descartes_search_pill_margin"
+        android:layout_marginEnd="@dimen/descartes_search_pill_margin"
+        android:layout_marginBottom="@dimen/descartes_search_pill_margin"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <com.android.settings.widget.DescartesBlurView
+            android:id="@+id/search_bar_blur_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <include layout="@layout/search_bar"/>
 
-        </LinearLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+        </com.android.settings.widget.DescartesBlurView>
+    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
