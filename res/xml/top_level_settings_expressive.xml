@@ -20,6 +20,14 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="top_level_settings">
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="top_level_descartes_hero"
+        android:order="-150"
+        android:layout="@layout/descartes_homepage_hero"
+        android:selectable="false"
+        settings:searchable="false"
+        settings:controller="com.android.settings.homepage.DescartesHeroPreferenceController"/>
+
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:order="-140"
         android:key="top_level_account_category"/>

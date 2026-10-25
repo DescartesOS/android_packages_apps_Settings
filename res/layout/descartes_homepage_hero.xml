@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: DescartesOS
+     SPDX-License-Identifier: Apache-2.0
+-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingTop="4dp"
+    android:paddingBottom="12dp">
+
+    <LinearLayout
+        android:id="@+id/descartes_hero_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/descartes_homepage_hero_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="128dp"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        android:stateListAnimator="@animator/descartes_press">
+
+        <FrameLayout
+            android:layout_width="72dp"
+            android:layout_height="72dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:src="@drawable/descartes_shape_cookie"
+                android:tint="@color/settingslib_materialColorPrimary" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/descartes_logo"
+                android:tint="@color/settingslib_materialColorOnPrimary" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/descartes_hero_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="variable-headline-small-emphasized"
+                android:maxLines="2"
+                android:textColor="@color/settingslib_materialColorOnPrimaryContainer"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/descartes_hero_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/descartes_about_pill"
+                android:fontFamily="variable-label-large-emphasized"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:textColor="@color/settingslib_materialColorOnPrimaryContainer"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/descartes_homepage_hero_chevron_bg"
+            android:importantForAccessibility="no"
+            android:scaleType="center"
+            android:src="@drawable/descartes_about_chevron"
+            android:tint="@color/settingslib_materialColorOnPrimary" />
+    </LinearLayout>
+</FrameLayout>

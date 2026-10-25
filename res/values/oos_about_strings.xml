@@ -11,4 +11,5 @@
     <string name="descartes_about_camera_front">Front <xliff:g id="megapixels" example="8 MP">%1$s</xliff:g></string>
     <string name="descartes_about_camera_rear"><xliff:g id="megapixels" example="50 MP + 8 MP">%1$s</xliff:g></string>
     <string name="descartes_about_battery_typ"><xliff:g id="capacity" example="7000">%1$d</xliff:g> mAh (TYP)</string>
+    <string name="descartes_homepage_hero_summary"><xliff:g id="os" example="DescartesOS v1.0">%1$s</xliff:g> · Android <xliff:g id="release" example="17">%2$s</xliff:g></string>
 </resources>
