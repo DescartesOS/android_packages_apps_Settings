@@ -14,7 +14,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.android.settings.R;
+import com.android.settingslib.widget.theme.R;
 
 public class WavyProgressView extends View {
 
