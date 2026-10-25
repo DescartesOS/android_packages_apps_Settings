@@ -233,7 +233,6 @@ class BuildMaintainerPreference :
     companion object {
         private const val TAG = "BuildMaintainerPreference"
         private const val OTA_JSON_URL =
-            "https://raw.githubusercontent.com/crdroidandroid/" +
-                "android_vendor_crDroidOTA/refs/heads/17.0/%s.json"
+            "https://raw.githubusercontent.com/DescartesOS/OTA/lineage-24.0/%s.json"
     }
 }
