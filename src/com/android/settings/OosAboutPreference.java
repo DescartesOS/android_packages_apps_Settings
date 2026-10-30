@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -114,6 +115,8 @@ public class OosAboutPreference extends BasePreferenceController
         WavyProgressView storageBar = holder.findViewById(R.id.rom_progress_bar);
         ImageView androidVersion = holder.findViewById(R.id.android_version);
         deviceName = holder.findViewById(R.id.device_name);
+        applySettingsIconShape(holder);
+        applyCompactAboutLayout(holder);
 
         osVersion.setText(getVersionLine());
         model.setText(getModelName());
@@ -163,7 +166,63 @@ public class OosAboutPreference extends BasePreferenceController
         final Intent platLogo = new Intent(Intent.ACTION_MAIN).setClassName(
                 "android", com.android.internal.app.PlatLogoActivity.class.getName());
         androidVersion.setOnTouchListener(this);
+        androidVersion.setOnClickListener(v -> startSafely(
+                new Intent(context, com.android.settings.Settings.FirmwareVersionActivity.class)));
         androidVersion.setOnLongClickListener(v -> startSafely(platLogo));
+    }
+
+    private void applyCompactAboutLayout(View holder) {
+        if (context.getResources().getConfiguration().screenWidthDp > 380) return;
+        reflowSpecRow(holder, R.id.about_memory_battery_row);
+        reflowSpecRow(holder, R.id.about_display_camera_row);
+    }
+
+    private void reflowSpecRow(View holder, int rowId) {
+        android.widget.LinearLayout row = holder.findViewById(rowId);
+        if (row == null) return;
+        row.setOrientation(android.widget.LinearLayout.VERTICAL);
+        int gap = (int) (8 * context.getResources().getDisplayMetrics().density + 0.5f);
+        for (int i = 0; i < row.getChildCount(); i++) {
+            View child = row.getChildAt(i);
+            android.widget.LinearLayout.LayoutParams params =
+                    (android.widget.LinearLayout.LayoutParams) child.getLayoutParams();
+            if (child instanceof android.widget.Space) {
+                params.width = android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
+                params.height = gap;
+            } else {
+                params.width = android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
+                params.height = android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
+                params.weight = 0;
+                int background;
+                if (child.getId() == R.id.display_section &&
+                        holder.findViewById(R.id.camera_section).getVisibility() == View.GONE) {
+                    background = R.drawable.descartes_about_seg_bottom;
+                } else if (child.getId() == R.id.display_section ||
+                        child.getId() == R.id.camera_section) {
+                    background = child.getId() == R.id.display_section
+                            ? R.drawable.descartes_about_seg_top
+                            : R.drawable.descartes_about_seg_bottom;
+                } else {
+                    background = child == row.getChildAt(0)
+                            ? R.drawable.descartes_about_seg_top
+                            : R.drawable.descartes_about_seg_bottom;
+                }
+                child.setBackgroundResource(background);
+            }
+            child.setLayoutParams(params);
+        }
+    }
+
+    private void applySettingsIconShape(View holder) {
+        int shape = Settings.System.getIntForUser(context.getContentResolver(),
+                "settings_icon_corner_style", 2, UserHandle.USER_CURRENT);
+        if (shape != 0) return;
+        int[] shapeIds = {R.id.soc_shape, R.id.ram_shape, R.id.battery_shape,
+                R.id.display_shape, R.id.camera_shape};
+        for (int id : shapeIds) {
+            ImageView image = holder.findViewById(id);
+            if (image != null) image.setImageResource(R.drawable.circle);
+        }
     }
 
     private String getVersionLine() {

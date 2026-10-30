@@ -195,6 +195,7 @@
         <FrameLayout style="@style/DescartesAboutSpecIcon">
 
             <ImageView
+                android:id="@+id/soc_shape"
                 style="@style/DescartesAboutSpecShape"
                 android:src="@drawable/descartes_shape_cookie"
                 android:tint="@color/settingslib_materialColorPrimaryContainer" />
@@ -215,6 +216,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/about_memory_battery_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/descartes_about_seg_gap"
@@ -230,6 +232,7 @@
             <FrameLayout style="@style/DescartesAboutSpecIcon">
 
                 <ImageView
+                    android:id="@+id/ram_shape"
                     style="@style/DescartesAboutSpecShape"
                     android:src="@drawable/descartes_shape_squircle"
                     android:tint="@color/settingslib_materialColorSecondaryContainer" />
@@ -263,6 +266,7 @@
             <FrameLayout style="@style/DescartesAboutSpecIcon">
 
                 <ImageView
+                    android:id="@+id/battery_shape"
                     style="@style/DescartesAboutSpecShape"
                     android:src="@drawable/descartes_shape_burst"
                     android:tint="@color/settingslib_materialColorTertiaryContainer" />
@@ -284,6 +288,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/about_display_camera_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/descartes_about_seg_gap"
@@ -300,6 +305,7 @@
             <FrameLayout style="@style/DescartesAboutSpecIcon">
 
                 <ImageView
+                    android:id="@+id/display_shape"
                     style="@style/DescartesAboutSpecShape"
                     android:src="@drawable/descartes_shape_clover"
                     android:tint="@color/settingslib_materialColorSecondaryContainer" />
@@ -335,6 +341,7 @@
             <FrameLayout style="@style/DescartesAboutSpecIcon">
 
                 <ImageView
+                    android:id="@+id/camera_shape"
                     style="@style/DescartesAboutSpecShape"
                     android:src="@drawable/descartes_shape_flower"
                     android:tint="@color/settingslib_materialColorPrimaryContainer" />

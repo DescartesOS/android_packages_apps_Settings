@@ -58,10 +58,11 @@ class BuildMaintainerPreference :
 
         val context = preference.context
         val overlayMaintainer = safeGetString(context, R.string.build_maintainer_summary).trim()
+        val fallbackMaintainer = configuredMaintainer(context, overlayMaintainer)
         val overlayDonateUrl = safeGetString(context, R.string.build_maintainer_donate_url)
 
         if (resolvedMaintainer.isEmpty()) {
-            resolvedMaintainer = overlayMaintainer
+            resolvedMaintainer = fallbackMaintainer
         }
         if (resolvedDonateUrl == null) {
             resolvedDonateUrl = sanitizeUrlOrNull(overlayDonateUrl)
@@ -71,14 +72,15 @@ class BuildMaintainerPreference :
 
         if (!fetchStarted) {
             fetchStarted = true
-            fetchMaintainerFromOta(preference, overlayMaintainer, overlayDonateUrl)
+            fetchMaintainerFromOta(preference, fallbackMaintainer, overlayDonateUrl)
         }
     }
 
     override fun getSummary(context: Context): CharSequence? {
         val maintainer = resolvedMaintainer
         if (maintainer.isNotEmpty()) return maintainer
-        return safeGetString(context, R.string.build_maintainer_summary).trim()
+        return configuredMaintainer(
+            context, safeGetString(context, R.string.build_maintainer_summary).trim())
     }
 
     override fun onPreferenceClick(preference: Preference): Boolean {
@@ -91,6 +93,18 @@ class BuildMaintainerPreference :
             Log.w(TAG, "No activity found for donate URL: $url", e)
         }
         return true
+    }
+
+
+    private fun configuredMaintainer(context: Context, overlay: String): String {
+        val maintainer = SystemProperties.get("ro.descartes.maintainer", "").trim()
+        if (maintainer.isNotEmpty()) return maintainer
+        return if (SystemProperties.get("ro.descartes.buildtype", "")
+                .equals("OFFICIAL", ignoreCase = true)) {
+            context.getString(R.string.build_maintainer_official)
+        } else {
+            overlay
+        }
     }
 
     private fun applyState(preference: Preference) {
